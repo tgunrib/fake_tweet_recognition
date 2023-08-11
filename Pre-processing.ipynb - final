@@ -1,0 +1,650 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "sv7M_sul2Prn",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037947949,
+     "user_tz": 0,
+     "elapsed": 24852,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    },
+    "outputId": "54d2027c-60ca-48ac-fc6b-9406bdd688d9"
+   },
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+      "Collecting googletrans==3.1.0a0\n",
+      "  Downloading googletrans-3.1.0a0.tar.gz (19 kB)\n",
+      "  Preparing metadata (setup.py) ... \u001B[?25l\u001B[?25hdone\n",
+      "Collecting httpx==0.13.3\n",
+      "  Downloading httpx-0.13.3-py3-none-any.whl (55 kB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m55.1/55.1 KB\u001B[0m \u001B[31m2.3 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hCollecting httpcore==0.9.*\n",
+      "  Downloading httpcore-0.9.1-py3-none-any.whl (42 kB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m42.6/42.6 KB\u001B[0m \u001B[31m4.6 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hRequirement already satisfied: certifi in /usr/local/lib/python3.8/dist-packages (from httpx==0.13.3->googletrans==3.1.0a0) (2022.12.7)\n",
+      "Collecting hstspreload\n",
+      "  Downloading hstspreload-2023.1.1-py3-none-any.whl (1.5 MB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m1.5/1.5 MB\u001B[0m \u001B[31m27.4 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hCollecting rfc3986<2,>=1.3\n",
+      "  Downloading rfc3986-1.5.0-py2.py3-none-any.whl (31 kB)\n",
+      "Requirement already satisfied: idna==2.* in /usr/local/lib/python3.8/dist-packages (from httpx==0.13.3->googletrans==3.1.0a0) (2.10)\n",
+      "Collecting chardet==3.*\n",
+      "  Downloading chardet-3.0.4-py2.py3-none-any.whl (133 kB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m133.4/133.4 KB\u001B[0m \u001B[31m15.2 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hCollecting sniffio\n",
+      "  Downloading sniffio-1.3.0-py3-none-any.whl (10 kB)\n",
+      "Collecting h11<0.10,>=0.8\n",
+      "  Downloading h11-0.9.0-py2.py3-none-any.whl (53 kB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m53.6/53.6 KB\u001B[0m \u001B[31m5.8 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hCollecting h2==3.*\n",
+      "  Downloading h2-3.2.0-py2.py3-none-any.whl (65 kB)\n",
+      "\u001B[2K     \u001B[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001B[0m \u001B[32m65.0/65.0 KB\u001B[0m \u001B[31m7.3 MB/s\u001B[0m eta \u001B[36m0:00:00\u001B[0m\n",
+      "\u001B[?25hCollecting hyperframe<6,>=5.2.0\n",
+      "  Downloading hyperframe-5.2.0-py2.py3-none-any.whl (12 kB)\n",
+      "Collecting hpack<4,>=3.0\n",
+      "  Downloading hpack-3.0.0-py2.py3-none-any.whl (38 kB)\n",
+      "Building wheels for collected packages: googletrans\n",
+      "  Building wheel for googletrans (setup.py) ... \u001B[?25l\u001B[?25hdone\n",
+      "  Created wheel for googletrans: filename=googletrans-3.1.0a0-py3-none-any.whl size=16368 sha256=273e918a7ee704e5b52c248e39f94fdd6420d308a03fc8b16010e59c16ea141e\n",
+      "  Stored in directory: /root/.cache/pip/wheels/dd/59/af/8d6c96a719763990f1c548e36b17d9efdfb767f42f7ff39f53\n",
+      "Successfully built googletrans\n",
+      "Installing collected packages: rfc3986, hyperframe, hpack, h11, chardet, sniffio, hstspreload, h2, httpcore, httpx, googletrans\n",
+      "  Attempting uninstall: chardet\n",
+      "    Found existing installation: chardet 4.0.0\n",
+      "    Uninstalling chardet-4.0.0:\n",
+      "      Successfully uninstalled chardet-4.0.0\n",
+      "Successfully installed chardet-3.0.4 googletrans-3.1.0a0 h11-0.9.0 h2-3.2.0 hpack-3.0.0 hstspreload-2023.1.1 httpcore-0.9.1 httpx-0.13.3 hyperframe-5.2.0 rfc3986-1.5.0 sniffio-1.3.0\n",
+      "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+      "Collecting tweet-preprocessor\n",
+      "  Downloading tweet_preprocessor-0.6.0-py3-none-any.whl (27 kB)\n",
+      "Installing collected packages: tweet-preprocessor\n",
+      "Successfully installed tweet-preprocessor-0.6.0\n"
+     ]
+    },
+    {
+     "output_type": "stream",
+     "name": "stderr",
+     "text": [
+      "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+      "[nltk_data]   Unzipping tokenizers/punkt.zip.\n",
+      "[nltk_data] Downloading package wordnet to /root/nltk_data...\n",
+      "[nltk_data] Downloading package omw-1.4 to /root/nltk_data...\n"
+     ]
+    }
+   ],
+   "source": [
+    "import time\n",
+    "!pip install googletrans==3.1.0a0\n",
+    "!pip install tweet-preprocessor\n",
+    "import pandas as pd\n",
+    "import preprocessor as p\n",
+    "import nltk\n",
+    "nltk.download('punkt')\n",
+    "from nltk import word_tokenize\n",
+    "from googletrans import Translator\n",
+    "import nltk\n",
+    "nltk.download('wordnet')\n",
+    "nltk.download('omw-1.4')\n",
+    "from nltk.stem import WordNetLemmatizer"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "id": "tbHFJ-QA2Prq",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037947949,
+     "user_tz": 0,
+     "elapsed": 8,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    }
+   },
+   "outputs": [],
+   "source": [
+    "def data_download(filename):\n",
+    "    data = pd.read_table(filename, sep=\"\\t\",header=0).dropna()\n",
+    "    print(data.head())\n",
+    "    return data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "id": "Jo12eVBm2Prr",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037947950,
+     "user_tz": 0,
+     "elapsed": 8,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    }
+   },
+   "outputs": [],
+   "source": [
+    "import re\n",
+    "def remove_emojis(data):\n",
+    "    \n",
+    "    emoj = re.compile(\"[\"\n",
+    "        u\"\\U00002700-\\U000027BF\"  # Dingbats\n",
+    "        u\"\\U0001F600-\\U0001F64F\"  # Emoticons\n",
+    "        u\"\\U00002600-\\U000026FF\"  # Miscellaneous Symbols\n",
+    "        u\"\\U0001F300-\\U0001F5FF\"  # Miscellaneous Symbols And Pictographs\n",
+    "        u\"\\U0001F900-\\U0001F9FF\"  # Supplemental Symbols and Pictographs\n",
+    "        u\"\\U0001FA70-\\U0001FAFF\"  # Symbols and Pictographs Extended-A\n",
+    "        u\"\\U0001F680-\\U0001F6FF\"  # Transport and Map Symbols\n",
+    "                      \"]+\", re.UNICODE)\n",
+    "    text = re.sub(emoj, '', data)\n",
+    "    p.set_options(p.OPT.EMOJI)\n",
+    "    return p.clean(text)\n",
+    "\n",
+    "# function for preprocessing tweet in preparation for sentiment analysis\n",
+    "def lower_tweets(text):\n",
+    "    #changing tweet text to small letters\n",
+    "    text = re.sub('(MT|mT|Mt)', '', text)  # remove re-tweet\n",
+    "    text = re.sub('(RT|rT|Rt|rt)', '', text)\n",
+    "    return text\n",
+    "def link_tweet(text):\n",
+    "    # Removing @ and links\n",
+    "    text = ' '.join(re.sub(\"(@[A-Za-z0-9]+)|([^0-9A-Za-z \\t]) |(\\w+:\\/\\/\\S+)\", \" \", text).split())\n",
+    "    text = re.sub('(@[A-Za-z]+[A-Za-z0-9-_]+)', '', text)  # remove tweeted at\n",
+    "    text = re.sub(r'\\\\n', '', text)\n",
+    "    return text\n",
+    "def punct_tweet(text):\n",
+    "    # removing punctuation and numbers\n",
+    "    punct = str.maketrans('', '', string.punctuation)\n",
+    "    text = text.translate(punct)\n",
+    "    text = text.lower()\n",
+    "    return text\n",
+    "    # tokenizing words and removing stop words from the tweet text\n",
+    "\n",
+    "def lemmatize(text):\n",
+    "    tokens = word_tokenize(text)\n",
+    "    # lemmetizing words\n",
+    "    lemmatizer = WordNetLemmatizer()\n",
+    "    lemma_words = [lemmatizer.lemmatize(w) for w in tokens]\n",
+    "    return lemma_words\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "outputs": [],
+   "source": [
+    "import string\n",
+    "\n",
+    "def translate_data(data):\n",
+    "  translator = Translator()\n",
+    "  translator.raise_Exception = True\n",
+    "  data.tweetText = data.tweetText.apply(lambda x : translator.translate(x,dest='en').text)\n",
+    "  return data"
+   ],
+   "metadata": {
+    "id": "Mm_Z4FBy2Prr",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037947950,
+     "user_tz": 0,
+     "elapsed": 7,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "outputs": [],
+   "source": [
+    "def preprocess_label(data):\n",
+    "    data.drop(columns=['timestamp','userId','imageId(s)'])\n",
+    "    data['label'] = data.label.apply(lambda  x : 'fake' if x == 'humor' else x )\n",
+    "    print(data.head())\n",
+    "    return data\n",
+    "def punctuate_data(data):\n",
+    "    data.tweetText = data.tweetText.apply(lambda x : punct_tweet(x))\n",
+    "    return data\n",
+    "def emoji_data(data):\n",
+    "    data.tweetText = data.tweetText.apply(lambda x : remove_emojis(x))\n",
+    "    return data\n",
+    "def lower_data(data):\n",
+    "    data.tweetText = data.tweetText.apply(lambda x : lower_tweets(x))\n",
+    "    return data\n",
+    "def link_data(data):\n",
+    "    data.tweetText = data.tweetText.apply(lambda x : link_tweet(x))\n",
+    "    return data\n",
+    "def lemmatise_data(data):\n",
+    "    data.tweetText = data.tweetText.apply(lambda x : lemmatize(x))\n",
+    "    return data\n",
+    "def tag_data(data):\n",
+    "    regex = re.compile('r^(RT|rT|Rt|rt)')\n",
+    "    retweets = data.tweetText.apply(lambda x : bool(regex.search(str(x))))\n",
+    "    data = data[~retweets]\n",
+    "    return data"
+   ],
+   "metadata": {
+    "id": "zPfmTDKi2Prs",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037948629,
+     "user_tz": 0,
+     "elapsed": 9,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n"
+     ]
+    }
+   ],
+   "source": [
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "lower_data(train_data).to_csv('train_lower.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "punctuate_data(train_data).to_csv('train_punct.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "emoji_data(train_data).to_csv('train_emoji.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "lemmatise_data(train_data).to_csv('train_lemmatise.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "link_data(train_data).to_csv('train_link.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "tag_data(train_data).to_csv('train_tag.csv')\n",
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "translate_data(train_data).to_csv('train_translations.csv')"
+   ],
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "Gaqvynqg2Prs",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1671881330416,
+     "user_tz": 0,
+     "elapsed": 643316,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    },
+    "outputId": "29ee757c-0f17-48bb-9662-794aa2abee61"
+   }
+  },
+  {
+   "cell_type": "code",
+   "source": [
+    "def preProcess_data(data):\n",
+    "    data = translate_data(data)\n",
+    "    data = tag_data(data)\n",
+    "    data = lower_data(data)\n",
+    "    data = emoji_data(data)\n",
+    "    data = link_data(data)\n",
+    "    data = punctuate_data(data)\n",
+    "    data = lemmatise_data(data)\n",
+    "    data = preprocess_label(data)\n",
+    "    return data\n"
+   ],
+   "metadata": {
+    "id": "DkZ4DsKDYitQ",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673037948629,
+     "user_tz": 0,
+     "elapsed": 8,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    }
+   },
+   "execution_count": 6,
+   "outputs": []
+  },
+  {
+   "cell_type": "code",
+   "source": [
+    "train_data = data_download('/content/mediaeval-2015-trainingset.txt')\n",
+    "preProcess_data(train_data).to_csv('train_final.csv')"
+   ],
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "8oLMFrC5WB_o",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1671878745397,
+     "user_tz": 0,
+     "elapsed": 635172,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    },
+    "outputId": "35963a7d-7f96-4a25-fa66-930ca151627f"
+   },
+   "execution_count": null,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  ¿Se acuerdan de la película: “El día después d...   \n",
+      "1  262995061304852481  @milenagimon: Miren a Sandy en NY!  Tremenda i...   \n",
+      "2  262979898002534400  Buena la foto del Huracán Sandy, me recuerda a...   \n",
+      "3  262996108400271360     Scary shit #hurricane #NY http://t.co/e4JLBUfH   \n",
+      "4  263018881839411200  My fave place in the world #nyc #hurricane #sa...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  263046056240115712  [do, you, remember, the, movie, the, day, afte...   \n",
+      "1  262995061304852481  [look, at, sandy, in, ny, tremendous, image, o...   \n",
+      "2  262979898002534400  [good, photo, of, hurricane, sandy, it, remind...   \n",
+      "3  262996108400271360                       [scary, shit, hurricane, ny]   \n",
+      "4  263018881839411200  [my, fave, place, in, the, world, nyc, hurrica...   \n",
+      "\n",
+      "      userId      imageId(s)        username                       timestamp  \\\n",
+      "0   21226711  sandyA_fake_46         iAnnieM  Mon Oct 29 22:34:01 +0000 2012   \n",
+      "1  192378571  sandyA_fake_09  CarlosVerareal  Mon Oct 29 19:11:23 +0000 2012   \n",
+      "2  132303095  sandyA_fake_09     LucasPalape  Mon Oct 29 18:11:08 +0000 2012   \n",
+      "3  241995902  sandyA_fake_29     Haaaaarryyy  Mon Oct 29 19:15:33 +0000 2012   \n",
+      "4  250315890  sandyA_fake_15  princess__natt  Mon Oct 29 20:46:02 +0000 2012   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n"
+     ]
+    }
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "              tweetId                                          tweetText  \\\n",
+      "0  578854927457349632  kereeen RT @Shyman33: Eclipse from ISS.... htt...   \n",
+      "1  578874632670953472  Absolutely beautiful! RT @Shyman33: Eclipse fr...   \n",
+      "2  578891261353984000  “@Shyman33: Eclipse from ISS.... http://t.co/C...   \n",
+      "3  578846612312748032        Eclipse from ISS.... http://t.co/En87OtvsU6   \n",
+      "4  578975333841551360  @ebonfigli: Éclipse vue de l'ISS... Autre chos...   \n",
+      "\n",
+      "       userId   imageId(s)         username                       timestamp  \\\n",
+      "0    70824972  eclipse_01            peay_s  Fri Mar 20 09:45:43 +0000 2015   \n",
+      "1   344707006  eclipse_01   JaredUcanChange  Fri Mar 20 11:04:02 +0000 2015   \n",
+      "2   224839607  eclipse_01          tpjp1231  Fri Mar 20 12:10:06 +0000 2015   \n",
+      "3   134543073  eclipse_01          Shyman33  Fri Mar 20 09:12:41 +0000 2015   \n",
+      "4  1150728872   eclipse_01       Epimethee_  Fri Mar 20 17:44:11 +0000 2015   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n",
+      "              tweetId                                          tweetText  \\\n",
+      "0  578854927457349632                        [kereeen, eclipse, from, i]   \n",
+      "1  578874632670953472          [absolutely, beautiful, eclipse, from, i]   \n",
+      "2  578891261353984000  [eclipse, from, i, 320, solar, eclipse, seen, ...   \n",
+      "3  578846612312748032                                 [eclipse, from, i]   \n",
+      "4  578975333841551360  [eclipse, seen, from, the, i, another, thing, ...   \n",
+      "\n",
+      "       userId   imageId(s)         username                       timestamp  \\\n",
+      "0    70824972  eclipse_01            peay_s  Fri Mar 20 09:45:43 +0000 2015   \n",
+      "1   344707006  eclipse_01   JaredUcanChange  Fri Mar 20 11:04:02 +0000 2015   \n",
+      "2   224839607  eclipse_01          tpjp1231  Fri Mar 20 12:10:06 +0000 2015   \n",
+      "3   134543073  eclipse_01          Shyman33  Fri Mar 20 09:12:41 +0000 2015   \n",
+      "4  1150728872   eclipse_01       Epimethee_  Fri Mar 20 17:44:11 +0000 2015   \n",
+      "\n",
+      "  label  \n",
+      "0  fake  \n",
+      "1  fake  \n",
+      "2  fake  \n",
+      "3  fake  \n",
+      "4  fake  \n"
+     ]
+    }
+   ],
+   "source": [
+    "test_data = data_download('/content/mediaeval-2015-testset.txt')\n",
+    "preProcess_data(test_data).to_csv('test_final.csv')"
+   ],
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1673038271949,
+     "user_tz": 0,
+     "elapsed": 285602,
+     "user": {
+      "displayName": "Oluwatosin Ogunribido",
+      "userId": "13169381129095811713"
+     }
+    },
+    "outputId": "c14345d6-cb56-4c9c-dc50-b4549bf6b480",
+    "id": "F0A3jq8pWIKA"
+   }
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  },
+  "colab": {
+   "provenance": []
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

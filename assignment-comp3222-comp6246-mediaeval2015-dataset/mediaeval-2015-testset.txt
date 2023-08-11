@@ -1,4 +1,4 @@
-tweetId	tweetText	userId	imageId(s)	username	timestamp	label
+tweetId	tweetText	userId	itmageId(s)	username	timestamp	label
 578854927457349632	kereeen RT @Shyman33: Eclipse from ISS.... http://t.co/je2hcFpVfN	70824972	eclipse_01 	peay_s	Fri Mar 20 09:45:43 +0000 2015	fake
 578874632670953472	Absolutely beautiful! RT @Shyman33: Eclipse from ISS.... http://t.co/oqwtTL0ThS	344707006	eclipse_01 	JaredUcanChange	Fri Mar 20 11:04:02 +0000 2015	fake
 578891261353984000	“@Shyman33: Eclipse from ISS.... http://t.co/C0VfboScRj” 우주에서본 3.20 일식 Wow! amazing!	224839607	eclipse_01 	tpjp1231	Fri Mar 20 12:10:06 +0000 2015	fake
